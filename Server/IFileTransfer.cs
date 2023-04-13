@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.ServiceModel;
 
 namespace Server
@@ -7,6 +8,6 @@ namespace Server
     public interface IFileTransfer
     {
         [OperationContract]
-        EStatusOfOperation UploadFile(string fileName, FileStream stream);
+        EStatusOfOperation UploadFile(string filePath, FileStream stream);
     }
 }

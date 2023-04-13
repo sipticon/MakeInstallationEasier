@@ -6,21 +6,38 @@ namespace Server
 {
     public class FileTransfer : IFileTransfer
     {
-        public EStatusOfOperation UploadFile(string fileName, FileStream stream)
+        private const string pathForInstalling = @"D:\C#\Test";
+        public EStatusOfOperation UploadFile(string filePath, FileStream stream)
         {
-            FileStream file = stream;
-            const string pathForInstalling = @"D:\C#\Test";
+            Stream file = stream;
+            string fileName = Path.GetFileName(filePath);
             if (file != null)
             {
-                return EStatusOfOperation.SUCCESSFULL;
-
+                
                 string[] directories = Directory.GetDirectories(pathForInstalling);
-                string[] fileNames = null;
-                List<string> n = new List<string>();
-                foreach (string directory in directories)
+                List<string> filePaths = new List<string>();
+                try
                 {
-                    fileNames = Directory.GetFiles(directory, fileName);
-                    n.AddRange(fileNames);
+                    foreach (string directory in directories)
+                    {
+                        filePaths.AddRange(Directory.GetFiles(directory, fileName));
+                    }
+
+                    foreach (string oldName in filePaths)
+                    {
+                        string newName = oldName.Replace(".", "backup.");
+                        File.Move(oldName, newName);
+                    }
+
+                    foreach (string directory in directories)
+                    {
+                        File.Copy(filePath, directory +"\\" + fileName);
+                    }
+                    return EStatusOfOperation.SUCCESSFULL;
+                }
+                catch (Exception e)
+                {
+                    return EStatusOfOperation.FAILURE;
                 }
             }
             else

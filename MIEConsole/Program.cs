@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using static System.Net.WebRequestMethods;
+using File = System.IO.File;
 
 namespace MIEConsole 
 {
@@ -13,9 +14,6 @@ namespace MIEConsole
         {
             FileService.FileTransferClient fileClient = new FileService.FileTransferClient();
             FileStream fStream = null;
-
-            const string pathForInstalling = @"D:\C#\Test";
-           
             Console.WriteLine("Please, write full path to file you need to upload");
             string filePath = Console.ReadLine();
 
@@ -27,25 +25,7 @@ namespace MIEConsole
             {
                 Console.WriteLine(ex);
             }
-            Console.WriteLine(fileClient.UploadFile(Path.GetFileName(filePath), fStream));
-
-            string fileName = Path.GetFileName(filePath);
-
-            string[] directories = Directory.GetDirectories(@"D:\C#\Test");
-            string[] fileNames = null;
-            List<string> n = new List<string>();
-            foreach (string directory in directories)
-            {
-                fileNames = Directory.GetFiles(directory, fileName);
-                n.AddRange(fileNames);
-            }
-
-            string str = "";
-            foreach (string name in n)
-            {
-                str += name + ",";
-            }
-            Console.WriteLine(str);
+            Console.WriteLine(fileClient.UploadFile(filePath, fStream));
         }
     }
 }

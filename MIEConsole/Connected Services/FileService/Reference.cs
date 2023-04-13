@@ -31,10 +31,10 @@ namespace MIEConsole.FileService {
     public interface IFileTransfer {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileTransfer/UploadFile", ReplyAction="http://tempuri.org/IFileTransfer/UploadFileResponse")]
-        MIEConsole.FileService.EStatusOfOperation UploadFile(string fileName, System.IO.FileStream stream);
+        MIEConsole.FileService.EStatusOfOperation UploadFile(string filePath, System.IO.FileStream stream);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileTransfer/UploadFile", ReplyAction="http://tempuri.org/IFileTransfer/UploadFileResponse")]
-        System.Threading.Tasks.Task<MIEConsole.FileService.EStatusOfOperation> UploadFileAsync(string fileName, System.IO.FileStream stream);
+        System.Threading.Tasks.Task<MIEConsole.FileService.EStatusOfOperation> UploadFileAsync(string filePath, System.IO.FileStream stream);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -64,12 +64,12 @@ namespace MIEConsole.FileService {
                 base(binding, remoteAddress) {
         }
         
-        public MIEConsole.FileService.EStatusOfOperation UploadFile(string fileName, System.IO.FileStream stream) {
-            return base.Channel.UploadFile(fileName, stream);
+        public MIEConsole.FileService.EStatusOfOperation UploadFile(string filePath, System.IO.FileStream stream) {
+            return base.Channel.UploadFile(filePath, stream);
         }
         
-        public System.Threading.Tasks.Task<MIEConsole.FileService.EStatusOfOperation> UploadFileAsync(string fileName, System.IO.FileStream stream) {
-            return base.Channel.UploadFileAsync(fileName, stream);
+        public System.Threading.Tasks.Task<MIEConsole.FileService.EStatusOfOperation> UploadFileAsync(string filePath, System.IO.FileStream stream) {
+            return base.Channel.UploadFileAsync(filePath, stream);
         }
     }
 }

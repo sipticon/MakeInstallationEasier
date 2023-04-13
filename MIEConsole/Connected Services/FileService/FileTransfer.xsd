@@ -5,7 +5,7 @@
   <xs:element name="UploadFile">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="fileName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="filePath" nillable="true" type="xs:string" />
         <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/System.IO" minOccurs="0" name="stream" nillable="true" type="q1:FileStream" />
       </xs:sequence>
     </xs:complexType>
