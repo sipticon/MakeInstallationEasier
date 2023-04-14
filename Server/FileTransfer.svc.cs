@@ -6,10 +6,10 @@ namespace Server
 {
     public class FileTransfer : IFileTransfer
     {
-        private const string pathForInstalling = @"D:\C#\Test";
         public EStatusOfOperation UploadFile(string filePath, FileStream stream)
         {
             Stream file = stream;
+            const string pathForInstalling = @"D:\C#\Test";
             string fileName = Path.GetFileName(filePath);
             if (file != null)
             {
@@ -25,7 +25,7 @@ namespace Server
 
                     foreach (string oldName in filePaths)
                     {
-                        string newName = oldName.Replace(".", "backup.");
+                        string newName = oldName + "_backup";
                         File.Move(oldName, newName);
                     }
 

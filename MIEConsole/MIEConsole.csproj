@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -65,10 +68,10 @@
     <None Include="Connected Services\FileService\FileTransfer2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\FileService\FileTransfer22.xsd">
+    <None Include="Connected Services\FileService\FileTransfer3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\FileService\FileTransfer3.xsd">
+    <None Include="Connected Services\FileService\FileTransfer4.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\FileService\MIEConsole.FileService.EStatusOfOperation.datasource">
@@ -77,6 +80,12 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Client\Client.csproj">
+      <Project>{93ebc892-802b-4805-b68a-652ecfe6662c}</Project>
+      <Name>Client</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\FileService\" />

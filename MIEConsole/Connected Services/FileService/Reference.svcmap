@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="9b8a9539-d363-48f8-867d-2ef5b14e7fb7" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="f51f9fd4-1386-4698-bbda-3db36bc29e05" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,13 +22,13 @@
     <MetadataSource Address="http://localhost:53897/FileTransfer.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="FileTransfer2.xsd" MetadataType="Schema" ID="1b32b650-04e2-4ce6-a268-c409f6b55caf" SourceId="1" SourceUrl="http://localhost:53897/FileTransfer.svc?xsd=xsd2" />
-    <MetadataFile FileName="FileTransfer3.xsd" MetadataType="Schema" ID="c2d5da42-edff-4ba1-bb3e-06009d269c09" SourceId="1" SourceUrl="http://localhost:53897/FileTransfer.svc?xsd=xsd4" />
-    <MetadataFile FileName="FileTransfer22.xsd" MetadataType="Schema" ID="9b77d0a6-dc71-41e1-8d56-3dd6c6f2b38c" SourceId="1" SourceUrl="http://localhost:53897/FileTransfer.svc?xsd=xsd3" />
-    <MetadataFile FileName="FileTransfer.wsdl" MetadataType="Wsdl" ID="de1912cd-d5db-42ac-81c4-4009b5b210ec" SourceId="1" SourceUrl="http://localhost:53897/FileTransfer.svc?wsdl" />
-    <MetadataFile FileName="FileTransfer.xsd" MetadataType="Schema" ID="16e78617-e15c-487f-8234-2754fe5ffda5" SourceId="1" SourceUrl="http://localhost:53897/FileTransfer.svc?xsd=xsd0" />
-    <MetadataFile FileName="FileTransfer.disco" MetadataType="Disco" ID="f6f8493e-b8a9-4ccd-b5fb-c1d97ad3d5d2" SourceId="1" SourceUrl="http://localhost:53897/FileTransfer.svc?disco" />
-    <MetadataFile FileName="FileTransfer1.xsd" MetadataType="Schema" ID="5475b6fc-0dbd-4c9a-b70a-f4fd0d0c7feb" SourceId="1" SourceUrl="http://localhost:53897/FileTransfer.svc?xsd=xsd1" />
+    <MetadataFile FileName="FileTransfer.xsd" MetadataType="Schema" ID="977df933-0596-475a-b549-59bd2e2380f7" SourceId="1" SourceUrl="http://localhost:53897/FileTransfer.svc?xsd=xsd2" />
+    <MetadataFile FileName="FileTransfer1.xsd" MetadataType="Schema" ID="6c166e7b-55b9-4a18-bc69-94313fbbf300" SourceId="1" SourceUrl="http://localhost:53897/FileTransfer.svc?xsd=xsd4" />
+    <MetadataFile FileName="FileTransfer2.xsd" MetadataType="Schema" ID="57fe7cf0-2499-4a6a-8a4b-0a6c0b7f9521" SourceId="1" SourceUrl="http://localhost:53897/FileTransfer.svc?xsd=xsd3" />
+    <MetadataFile FileName="FileTransfer.wsdl" MetadataType="Wsdl" ID="c9257d1c-4f0d-44b5-bcd9-f5137ea57b99" SourceId="1" SourceUrl="http://localhost:53897/FileTransfer.svc?wsdl" />
+    <MetadataFile FileName="FileTransfer3.xsd" MetadataType="Schema" ID="19813255-4499-44ba-bce7-6dca807de383" SourceId="1" SourceUrl="http://localhost:53897/FileTransfer.svc?xsd=xsd0" />
+    <MetadataFile FileName="FileTransfer.disco" MetadataType="Disco" ID="416dd0cd-8146-4dd0-90ea-89cc56c4e9ee" SourceId="1" SourceUrl="http://localhost:53897/FileTransfer.svc?disco" />
+    <MetadataFile FileName="FileTransfer4.xsd" MetadataType="Schema" ID="796c50d2-3add-43f3-ac3d-02007fe6c5a9" SourceId="1" SourceUrl="http://localhost:53897/FileTransfer.svc?xsd=xsd1" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
