@@ -20,21 +20,62 @@ namespace MIEConsole.FileService {
         SUCCESSFULL = 0,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        FAILURE = 1,
+        FILEDOESNOTEXISTS = 1,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        FIND = 2,
+        FAILWHILEBACKUP = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        FAILWHILECHANGEFILES = 3,
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="FileService.IFileTransfer")]
     public interface IFileTransfer {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileTransfer/UploadFile", ReplyAction="http://tempuri.org/IFileTransfer/UploadFileResponse")]
-        MIEConsole.FileService.EStatusOfOperation UploadFile(string filePath, System.IO.FileStream stream);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileTransfer/BackupAndChangeFiles", ReplyAction="http://tempuri.org/IFileTransfer/BackupAndChangeFilesResponse")]
+        MIEConsole.FileService.EStatusOfOperation BackupAndChangeFiles(string filePath);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileTransfer/UploadFile", ReplyAction="http://tempuri.org/IFileTransfer/UploadFileResponse")]
-        System.Threading.Tasks.Task<MIEConsole.FileService.EStatusOfOperation> UploadFileAsync(string filePath, System.IO.FileStream stream);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileTransfer/BackupAndChangeFiles", ReplyAction="http://tempuri.org/IFileTransfer/BackupAndChangeFilesResponse")]
+        System.Threading.Tasks.Task<MIEConsole.FileService.EStatusOfOperation> BackupAndChangeFilesAsync(string filePath);
+        
+        // CODEGEN: Generating message contract since the operation UploadFileToServer is neither RPC nor document wrapped.
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileTransfer/UploadFileToServer", ReplyAction="http://tempuri.org/IFileTransfer/UploadFileToServerResponse")]
+        MIEConsole.FileService.UploadFileToServerResponse UploadFileToServer(MIEConsole.FileService.FileData request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileTransfer/UploadFileToServer", ReplyAction="http://tempuri.org/IFileTransfer/UploadFileToServerResponse")]
+        System.Threading.Tasks.Task<MIEConsole.FileService.UploadFileToServerResponse> UploadFileToServerAsync(MIEConsole.FileService.FileData request);
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="FileData", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class FileData {
+        
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://tempuri.org/")]
+        public string fileName;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public System.IO.Stream stream;
+        
+        public FileData() {
+        }
+        
+        public FileData(string fileName, System.IO.Stream stream) {
+            this.fileName = fileName;
+            this.stream = stream;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class UploadFileToServerResponse {
+        
+        public UploadFileToServerResponse() {
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -64,12 +105,36 @@ namespace MIEConsole.FileService {
                 base(binding, remoteAddress) {
         }
         
-        public MIEConsole.FileService.EStatusOfOperation UploadFile(string filePath, System.IO.FileStream stream) {
-            return base.Channel.UploadFile(filePath, stream);
+        public MIEConsole.FileService.EStatusOfOperation BackupAndChangeFiles(string filePath) {
+            return base.Channel.BackupAndChangeFiles(filePath);
         }
         
-        public System.Threading.Tasks.Task<MIEConsole.FileService.EStatusOfOperation> UploadFileAsync(string filePath, System.IO.FileStream stream) {
-            return base.Channel.UploadFileAsync(filePath, stream);
+        public System.Threading.Tasks.Task<MIEConsole.FileService.EStatusOfOperation> BackupAndChangeFilesAsync(string filePath) {
+            return base.Channel.BackupAndChangeFilesAsync(filePath);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        MIEConsole.FileService.UploadFileToServerResponse MIEConsole.FileService.IFileTransfer.UploadFileToServer(MIEConsole.FileService.FileData request) {
+            return base.Channel.UploadFileToServer(request);
+        }
+        
+        public void UploadFileToServer(string fileName, System.IO.Stream stream) {
+            MIEConsole.FileService.FileData inValue = new MIEConsole.FileService.FileData();
+            inValue.fileName = fileName;
+            inValue.stream = stream;
+            MIEConsole.FileService.UploadFileToServerResponse retVal = ((MIEConsole.FileService.IFileTransfer)(this)).UploadFileToServer(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<MIEConsole.FileService.UploadFileToServerResponse> MIEConsole.FileService.IFileTransfer.UploadFileToServerAsync(MIEConsole.FileService.FileData request) {
+            return base.Channel.UploadFileToServerAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<MIEConsole.FileService.UploadFileToServerResponse> UploadFileToServerAsync(string fileName, System.IO.Stream stream) {
+            MIEConsole.FileService.FileData inValue = new MIEConsole.FileService.FileData();
+            inValue.fileName = fileName;
+            inValue.stream = stream;
+            return ((MIEConsole.FileService.IFileTransfer)(this)).UploadFileToServerAsync(inValue);
         }
     }
 }

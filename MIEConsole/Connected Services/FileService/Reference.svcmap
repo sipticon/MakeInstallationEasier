@@ -23,8 +23,7 @@
   </MetadataSources>
   <Metadata>
     <MetadataFile FileName="FileTransfer.xsd" MetadataType="Schema" ID="977df933-0596-475a-b549-59bd2e2380f7" SourceId="1" SourceUrl="http://localhost:53897/FileTransfer.svc?xsd=xsd2" />
-    <MetadataFile FileName="FileTransfer1.xsd" MetadataType="Schema" ID="6c166e7b-55b9-4a18-bc69-94313fbbf300" SourceId="1" SourceUrl="http://localhost:53897/FileTransfer.svc?xsd=xsd4" />
-    <MetadataFile FileName="FileTransfer2.xsd" MetadataType="Schema" ID="57fe7cf0-2499-4a6a-8a4b-0a6c0b7f9521" SourceId="1" SourceUrl="http://localhost:53897/FileTransfer.svc?xsd=xsd3" />
+    <MetadataFile FileName="FileTransfer1.xsd" MetadataType="Schema" ID="97921e30-f9a8-4f2b-8346-7b5f6765b958" SourceId="1" SourceUrl="http://localhost:53897/FileTransfer.svc?xsd=xsd3" />
     <MetadataFile FileName="FileTransfer.wsdl" MetadataType="Wsdl" ID="c9257d1c-4f0d-44b5-bcd9-f5137ea57b99" SourceId="1" SourceUrl="http://localhost:53897/FileTransfer.svc?wsdl" />
     <MetadataFile FileName="FileTransfer3.xsd" MetadataType="Schema" ID="19813255-4499-44ba-bce7-6dca807de383" SourceId="1" SourceUrl="http://localhost:53897/FileTransfer.svc?xsd=xsd0" />
     <MetadataFile FileName="FileTransfer.disco" MetadataType="Disco" ID="416dd0cd-8146-4dd0-90ea-89cc56c4e9ee" SourceId="1" SourceUrl="http://localhost:53897/FileTransfer.svc?disco" />

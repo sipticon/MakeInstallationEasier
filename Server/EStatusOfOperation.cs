@@ -3,7 +3,8 @@
     public enum EStatusOfOperation
     {
         SUCCESSFULL, 
-        FAILURE,
-        FIND
+        FILEDOESNOTEXISTS,
+        FAILWHILEBACKUP,
+        FAILWHILECHANGEFILES
     }
 }

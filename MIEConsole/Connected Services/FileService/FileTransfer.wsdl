@@ -4,28 +4,48 @@
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:53897/FileTransfer.svc?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:53897/FileTransfer.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://localhost:53897/FileTransfer.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/System.IO" />
-      <xsd:import schemaLocation="http://localhost:53897/FileTransfer.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System" />
-      <xsd:import schemaLocation="http://localhost:53897/FileTransfer.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Server" />
+      <xsd:import schemaLocation="http://localhost:53897/FileTransfer.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Server" />
+      <xsd:import schemaLocation="http://localhost:53897/FileTransfer.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/Message" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="IFileTransfer_UploadFile_InputMessage">
-    <wsdl:part name="parameters" element="tns:UploadFile" />
+  <wsdl:message name="IFileTransfer_BackupAndChangeFiles_InputMessage">
+    <wsdl:part name="parameters" element="tns:BackupAndChangeFiles" />
   </wsdl:message>
-  <wsdl:message name="IFileTransfer_UploadFile_OutputMessage">
-    <wsdl:part name="parameters" element="tns:UploadFileResponse" />
+  <wsdl:message name="IFileTransfer_BackupAndChangeFiles_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BackupAndChangeFilesResponse" />
   </wsdl:message>
+  <wsdl:message name="FileData">
+    <wsdl:part name="parameters" element="tns:FileData" />
+  </wsdl:message>
+  <wsdl:message name="FileData_Headers">
+    <wsdl:part name="fileName" element="tns:fileName" />
+  </wsdl:message>
+  <wsdl:message name="IFileTransfer_UploadFileToServer_OutputMessage" />
   <wsdl:portType name="IFileTransfer">
-    <wsdl:operation name="UploadFile">
-      <wsdl:input wsaw:Action="http://tempuri.org/IFileTransfer/UploadFile" message="tns:IFileTransfer_UploadFile_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IFileTransfer/UploadFileResponse" message="tns:IFileTransfer_UploadFile_OutputMessage" />
+    <wsdl:operation name="BackupAndChangeFiles">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFileTransfer/BackupAndChangeFiles" message="tns:IFileTransfer_BackupAndChangeFiles_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFileTransfer/BackupAndChangeFilesResponse" message="tns:IFileTransfer_BackupAndChangeFiles_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UploadFileToServer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFileTransfer/UploadFileToServer" name="FileData" message="tns:FileData" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFileTransfer/UploadFileToServerResponse" message="tns:IFileTransfer_UploadFileToServer_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IFileTransfer" type="tns:IFileTransfer">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="UploadFile">
-      <soap:operation soapAction="http://tempuri.org/IFileTransfer/UploadFile" style="document" />
+    <wsdl:operation name="BackupAndChangeFiles">
+      <soap:operation soapAction="http://tempuri.org/IFileTransfer/BackupAndChangeFiles" style="document" />
       <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadFileToServer">
+      <soap:operation soapAction="http://tempuri.org/IFileTransfer/UploadFileToServer" style="document" />
+      <wsdl:input name="FileData">
+        <soap:header message="tns:FileData_Headers" part="fileName" use="literal" />
         <soap:body use="literal" />
       </wsdl:input>
       <wsdl:output>

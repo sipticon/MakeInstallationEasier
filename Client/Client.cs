@@ -1,21 +1,22 @@
 ﻿using System;
 using System.IO;
+using System.ServiceModel;
 
 namespace Client
 {
     public class Client
     {
 
-        public FileStream OpenFileFromDir(string dir)
+        public Stream OpenFileFromDir(string dir)
         {
-            FileStream fileStream = null;
+            Stream fileStream = null;
             try
             {
                 fileStream = new FileStream(dir, FileMode.Open, FileAccess.Read);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Console.WriteLine(ex);
+                return null;
             }
             return fileStream;
         }
