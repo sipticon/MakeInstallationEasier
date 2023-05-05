@@ -8,10 +8,13 @@ namespace Server
     public interface IFileTransfer
     {
         [OperationContract]
-        EStatusOfOperation BackupAndChangeFiles(string filePath);
+        EStatusOfOperation FileInstall(string filePath);
 
         [OperationContract]
         void UploadFileToServer(FileData fileData);
+
+        [OperationContract]
+        void BackupAndChangeFiles(string oldName, string[] allDirectoriesFromPath, string pathOfFileForInstalling);
     }
     [MessageContract]
     public class FileData : IDisposable

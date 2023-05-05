@@ -36,10 +36,14 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Win32.Registry, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -55,24 +59,24 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Connected Services\FileService\FileTransfer.wsdl" />
-    <None Include="Connected Services\FileService\FileTransfer.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\FileService\FileTransfer1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\FileService\FileTransfer3.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\FileService\FileTransfer4.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Connected Services\FileService\MIEConsole.FileService.EStatusOfOperation.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\FileService\MIEConsole.FileService.UploadFileToServerResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -85,10 +89,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\FileService\" />
+    <Folder Include="Properties\DataSources\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\FileService\FileTransfer.disco" />
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\FileService\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\FileService\configuration91.svcinfo" />
@@ -97,16 +104,10 @@
     <None Include="Connected Services\FileService\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\FileService\MIEConsole.FileService.UploadFileToServerResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
     <None Include="Connected Services\FileService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Properties\DataSources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

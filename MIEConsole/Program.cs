@@ -1,7 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
+using System.ServiceProcess;
+using Client;
 using MIEConsole.FileService;
+using static System.Net.WebRequestMethods;
 
 namespace MIEConsole 
 {
@@ -11,10 +13,8 @@ namespace MIEConsole
         {
             Client.Client client = new Client.Client();
             FileTransferClient fileService = new FileTransferClient();
-            
             Console.WriteLine("Please, write full path to file you need to upload");
-            string filePath = @"C:\Users\oleksandrm\inputfile.txt";
-
+            string filePath = Console.ReadLine();
             FileStream openedFileStream = client.OpenFileFromDir(filePath) as FileStream;
 
             FileData fileData = new FileData();
@@ -22,9 +22,8 @@ namespace MIEConsole
             fileData.fileName = Path.GetFileName(openedFileStream.Name);
 
             fileService.UploadFileToServer(fileData.fileName, fileData.stream);
-            string resultOfOperation = fileService.BackupAndChangeFiles(fileData.fileName).ToString();
+            string resultOfOperation = fileService.FileInstall(fileData.fileName).ToString();
             Console.WriteLine("The result of operation is " + resultOfOperation);
-
             openedFileStream.Close();
         }
     }

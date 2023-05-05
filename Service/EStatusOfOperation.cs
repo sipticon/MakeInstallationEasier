@@ -2,9 +2,9 @@
 {
     public enum EStatusOfOperation
     {
-        SUCCESSFULL, 
+        SUCCESSFULL,
         FILEDOESNOTEXISTS,
         FAILWHILEBACKUP,
-        FAILWHILECHANGEFILES
+        FAILWILESTOPSERV
     }
 }

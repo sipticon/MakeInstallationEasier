@@ -33,11 +33,11 @@ namespace MIEConsole.FileService {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="FileService.IFileTransfer")]
     public interface IFileTransfer {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileTransfer/BackupAndChangeFiles", ReplyAction="http://tempuri.org/IFileTransfer/BackupAndChangeFilesResponse")]
-        MIEConsole.FileService.EStatusOfOperation BackupAndChangeFiles(string filePath);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileTransfer/FileInstall", ReplyAction="http://tempuri.org/IFileTransfer/FileInstallResponse")]
+        MIEConsole.FileService.EStatusOfOperation FileInstall(string filePath);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileTransfer/BackupAndChangeFiles", ReplyAction="http://tempuri.org/IFileTransfer/BackupAndChangeFilesResponse")]
-        System.Threading.Tasks.Task<MIEConsole.FileService.EStatusOfOperation> BackupAndChangeFilesAsync(string filePath);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileTransfer/FileInstall", ReplyAction="http://tempuri.org/IFileTransfer/FileInstallResponse")]
+        System.Threading.Tasks.Task<MIEConsole.FileService.EStatusOfOperation> FileInstallAsync(string filePath);
         
         // CODEGEN: Generating message contract since the operation UploadFileToServer is neither RPC nor document wrapped.
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileTransfer/UploadFileToServer", ReplyAction="http://tempuri.org/IFileTransfer/UploadFileToServerResponse")]
@@ -45,6 +45,12 @@ namespace MIEConsole.FileService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileTransfer/UploadFileToServer", ReplyAction="http://tempuri.org/IFileTransfer/UploadFileToServerResponse")]
         System.Threading.Tasks.Task<MIEConsole.FileService.UploadFileToServerResponse> UploadFileToServerAsync(MIEConsole.FileService.FileData request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileTransfer/BackupAndChangeFiles", ReplyAction="http://tempuri.org/IFileTransfer/BackupAndChangeFilesResponse")]
+        void BackupAndChangeFiles(string oldName, string[] allDirectoriesFromPath, string pathOfFileForInstalling);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileTransfer/BackupAndChangeFiles", ReplyAction="http://tempuri.org/IFileTransfer/BackupAndChangeFilesResponse")]
+        System.Threading.Tasks.Task BackupAndChangeFilesAsync(string oldName, string[] allDirectoriesFromPath, string pathOfFileForInstalling);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -105,12 +111,12 @@ namespace MIEConsole.FileService {
                 base(binding, remoteAddress) {
         }
         
-        public MIEConsole.FileService.EStatusOfOperation BackupAndChangeFiles(string filePath) {
-            return base.Channel.BackupAndChangeFiles(filePath);
+        public MIEConsole.FileService.EStatusOfOperation FileInstall(string filePath) {
+            return base.Channel.FileInstall(filePath);
         }
         
-        public System.Threading.Tasks.Task<MIEConsole.FileService.EStatusOfOperation> BackupAndChangeFilesAsync(string filePath) {
-            return base.Channel.BackupAndChangeFilesAsync(filePath);
+        public System.Threading.Tasks.Task<MIEConsole.FileService.EStatusOfOperation> FileInstallAsync(string filePath) {
+            return base.Channel.FileInstallAsync(filePath);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -135,6 +141,14 @@ namespace MIEConsole.FileService {
             inValue.fileName = fileName;
             inValue.stream = stream;
             return ((MIEConsole.FileService.IFileTransfer)(this)).UploadFileToServerAsync(inValue);
+        }
+        
+        public void BackupAndChangeFiles(string oldName, string[] allDirectoriesFromPath, string pathOfFileForInstalling) {
+            base.Channel.BackupAndChangeFiles(oldName, allDirectoriesFromPath, pathOfFileForInstalling);
+        }
+        
+        public System.Threading.Tasks.Task BackupAndChangeFilesAsync(string oldName, string[] allDirectoriesFromPath, string pathOfFileForInstalling) {
+            return base.Channel.BackupAndChangeFilesAsync(oldName, allDirectoriesFromPath, pathOfFileForInstalling);
         }
     }
 }

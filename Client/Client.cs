@@ -1,12 +1,10 @@
 ﻿using System;
 using System.IO;
-using System.ServiceModel;
 
 namespace Client
 {
     public class Client
     {
-
         public Stream OpenFileFromDir(string dir)
         {
             Stream fileStream = null;

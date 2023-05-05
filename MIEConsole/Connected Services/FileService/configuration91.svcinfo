@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="9.1" CheckSum="4ZUXDduHZYMCSlrPRoDoGc24PG8+StGvm33d9XauSNo=">
+<SavedWcfConfigurationInformation xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="9.1" CheckSum="n7z0K8zBRb4ryGKfXwM5z9Q8D7q4QLYEmvRl43q0nz4=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="basicHttpBinding" name="BasicHttpBinding_IFileTransfer">
       <properties>
@@ -112,10 +112,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="BasicHttpBinding_IFileTransfer" contract="FileService.IFileTransfer" bindingType="basicHttpBinding" address="http://localhost:53897/FileTransfer.svc" bindingConfiguration="BasicHttpBinding_IFileTransfer">
+    <endpoint name="BasicHttpBinding_IFileTransfer" contract="FileService.IFileTransfer" bindingType="basicHttpBinding" address="http://10.128.35.12:9090/" bindingConfiguration="BasicHttpBinding_IFileTransfer">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://localhost:53897/FileTransfer.svc</serializedValue>
+          <serializedValue>http://10.128.35.12:9090/</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
