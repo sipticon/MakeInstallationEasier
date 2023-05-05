@@ -3,9 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.ServiceModel;
 using System.ServiceProcess;
-using System.Web.Services.Description;
 
 namespace Server
 {
