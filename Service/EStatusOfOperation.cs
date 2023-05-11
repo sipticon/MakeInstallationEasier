@@ -1,4 +1,4 @@
-﻿namespace Server
+﻿namespace Service
 {
     public enum EStatusOfOperation
     {

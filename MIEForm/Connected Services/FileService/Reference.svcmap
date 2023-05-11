@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="ec2678b5-b5eb-4c83-9160-748f79b85532" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="8b371a3b-17fc-4304-a89d-88e225d4014e" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,7 +22,7 @@
     <MetadataSource Address="http://10.128.35.12:9090/?singleWsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="FileTransfer.wsdl" MetadataType="Wsdl" ID="4b349c47-bca7-42fc-9441-d92c502533d7" SourceId="1" SourceUrl="http://10.128.35.12:9090/?singleWsdl" />
+    <MetadataFile FileName="FileTransfer.wsdl" MetadataType="Wsdl" ID="c7eea4ab-3bbe-4700-9641-90343d9e249c" SourceId="1" SourceUrl="http://10.128.35.12:9090/?singleWsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

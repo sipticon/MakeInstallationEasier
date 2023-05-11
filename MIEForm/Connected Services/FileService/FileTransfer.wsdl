@@ -2,7 +2,7 @@
 <wsdl:definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://tempuri.org/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" name="FileTransfer" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <xs:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-      <xs:import namespace="http://schemas.datacontract.org/2004/07/Server" />
+      <xs:import namespace="http://schemas.datacontract.org/2004/07/Service" />
       <xs:import namespace="http://schemas.microsoft.com/Message" />
       <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
       <xs:element name="FileInstall">
@@ -15,7 +15,7 @@
       <xs:element name="FileInstallResponse">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Server" minOccurs="0" name="FileInstallResult" type="q1:EStatusOfOperation" />
+            <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Service" minOccurs="0" name="FileInstallResult" type="q1:EStatusOfOperation" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -83,13 +83,13 @@
       <xs:attribute name="Id" type="xs:ID" />
       <xs:attribute name="Ref" type="xs:IDREF" />
     </xs:schema>
-    <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Server" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Server" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Service" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Service" xmlns:xs="http://www.w3.org/2001/XMLSchema">
       <xs:simpleType name="EStatusOfOperation">
         <xs:restriction base="xs:string">
           <xs:enumeration value="SUCCESSFULL" />
           <xs:enumeration value="FILEDOESNOTEXISTS" />
           <xs:enumeration value="FAILWHILEBACKUP" />
-          <xs:enumeration value="FAILWHILECHANGEFILES" />
+          <xs:enumeration value="FAILWILESTOPSERV" />
         </xs:restriction>
       </xs:simpleType>
       <xs:element name="EStatusOfOperation" nillable="true" type="tns:EStatusOfOperation" />

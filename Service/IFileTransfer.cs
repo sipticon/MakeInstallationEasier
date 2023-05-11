@@ -1,8 +1,9 @@
 ﻿using System;
 using System.IO;
+using System.Runtime.Serialization;
 using System.ServiceModel;
 
-namespace Server
+namespace Service
 {
     [ServiceContract]
     public interface IFileTransfer

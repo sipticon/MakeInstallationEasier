@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-namespace FileLockInfo
+namespace Service
 {
     public static class Win32Processes
     {

@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("MIEConsole")]
+[assembly: AssemblyTitle("MIEForm")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("MIEConsole")]
-[assembly: AssemblyCopyright("Copyright ©  2023")]
+[assembly: AssemblyCompany("NICE Systems")]
+[assembly: AssemblyProduct("MIEForm")]
+[assembly: AssemblyCopyright("Copyright © NICE Systems 2023")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("a13a8b19-2112-4eca-8818-21805f5df239")]
+[assembly: Guid("cf3f4c2d-5d7c-451e-8b03-296c87c74eea")]
 
 // Version information for an assembly consists of the following four values:
 //

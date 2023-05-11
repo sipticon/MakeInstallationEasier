@@ -1,20 +1,22 @@
-﻿using FileLockInfo;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.ServiceModel;
 using System.ServiceProcess;
+using System.Timers;
 
-namespace Server
+namespace Service
 {
     public class FileTransfer : IFileTransfer
     {
-        string pathForUploadFileToServer = Directory.GetCurrentDirectory(); 
+        string pathForUploadFileToServer = Directory.GetCurrentDirectory();
         const string pathForInstalling = @"D:\Program files\NICE Systems";
         public EStatusOfOperation FileInstall(string fileName)
         {
             string pathOfFileForInstalling = Path.Combine(pathForUploadFileToServer, fileName);
-            string[] allDirectoriesFromPath = Directory.GetDirectories(pathForInstalling, "*", searchOption: SearchOption.AllDirectories);
+            string[] allDirectoriesFromPath =
+                Directory.GetDirectories(pathForInstalling, "*", searchOption: SearchOption.AllDirectories);
             List<string> directoriesWhereFileExists = new List<string>();
             List<Process> locks = new List<Process>();
             if (File.Exists(pathOfFileForInstalling))
@@ -25,6 +27,7 @@ namespace Server
                     {
                         directoriesWhereFileExists.AddRange(Directory.GetFiles(directory, fileName));
                     }
+
                     foreach (string oldName in directoriesWhereFileExists)
                     {
                         FileInfo fileInfo = new FileInfo(oldName);
@@ -52,6 +55,7 @@ namespace Server
                     throw ex;
                     return EStatusOfOperation.FAILWHILEBACKUP;
                 }
+
                 return EStatusOfOperation.SUCCESSFULL;
             }
             else
@@ -60,7 +64,8 @@ namespace Server
             }
         }
 
-        public void BackupAndChangeFiles(string oldName, string[] allDirectoriesFromPath, string pathOfFileForInstalling)
+        public void BackupAndChangeFiles(string oldName, string[] allDirectoriesFromPath,
+            string pathOfFileForInstalling)
         {
             string fileName = Path.GetFileName(oldName);
             string newName = oldName + "_backup";
@@ -76,22 +81,28 @@ namespace Server
             {
                 foreach (var proc in locks)
                 {
-                    proc.Kill(); 
+                    proc.Kill();
                     proc.WaitForExit(1000);
                     File.Delete(newName);
                     proc.Start();
                 }
             }
-            else if(File.Exists(newName))
+            else if (File.Exists(newName))
                 File.Delete(newName);
 
             File.Move(oldName, newName);
+            Console.WriteLine($"{newName} created  successfully");
             try
             {
                 foreach (string directory in allDirectoriesFromPath)
                 {
-                    if (File.Exists(directory + "\\" + fileName + "_backup") && !File.Exists(directory + "\\" + fileName))
+                    if (File.Exists(directory + "\\" + fileName + "_backup") &&
+                        !File.Exists(directory + "\\" + fileName))
+                    {
                         File.Copy(pathOfFileForInstalling, directory + "\\" + fileName);
+                        Console.WriteLine($"File {fileName}  successfully moved to {directory}");
+                        
+                    }
                 }
             }
             catch (Exception e)
@@ -99,6 +110,7 @@ namespace Server
                 throw e;
             }
         }
+
         public void UploadFileToServer(FileData fileData)
         {
             FileStream serverStream = null;
@@ -116,6 +128,7 @@ namespace Server
             }
             serverStream.Close();
             clientStream.Close();
+            Console.WriteLine($"File {fileData.fileName} uploaded to server successfully");
         }
 
         private void StartWindowsService(string serviceName)
@@ -124,6 +137,7 @@ namespace Server
             TimeSpan timeout = TimeSpan.FromMilliseconds(1000);
             serviceController.Start();
             serviceController.WaitForStatus(ServiceControllerStatus.Running, timeout);
+            Console.WriteLine($"Service {serviceName} started  successfully");
         }
 
         private void StopWindowsService(string serviceName)
@@ -132,6 +146,7 @@ namespace Server
             TimeSpan timeout = TimeSpan.FromMilliseconds(1000);
             serviceController.Stop();
             serviceController.WaitForStatus(ServiceControllerStatus.Stopped, timeout);
+            Console.WriteLine($"Service {serviceName} stopped  successfully");
         }
     }
 }

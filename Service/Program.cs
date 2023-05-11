@@ -1,8 +1,9 @@
 ﻿using System;
 using System.ServiceModel;
 using System.ServiceModel.Description;
+using System.Web.Services.Description;
 
-namespace Server
+namespace Service
 {
     public class Program
     {
@@ -11,11 +12,9 @@ namespace Server
             Uri baseAddress = new Uri("http://10.128.35.12:9090/");
             using (ServiceHost serviceHost = new ServiceHost(typeof(FileTransfer), baseAddress))
             {
-                try 
+                try
                 {
                     ServiceDebugBehavior debug = serviceHost.Description.Behaviors.Find<ServiceDebugBehavior>();
-
-                    // if not found - add behavior with setting turned on 
                     if (debug == null)
                     {
                         serviceHost.Description.Behaviors.Add(
@@ -23,7 +22,6 @@ namespace Server
                     }
                     else
                     {
-                        // make sure setting is turned ON
                         if (!debug.IncludeExceptionDetailInFaults)
                         {
                             debug.IncludeExceptionDetailInFaults = true;
@@ -46,6 +44,11 @@ namespace Server
                 catch (CommunicationException commProblem)
                 {
                     Console.WriteLine(commProblem.Message);
+                    Console.ReadLine();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
                     Console.ReadLine();
                 }
             }
