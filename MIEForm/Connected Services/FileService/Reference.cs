@@ -34,10 +34,10 @@ namespace MIEForm.FileService {
     public interface IFileTransfer {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileTransfer/FileInstall", ReplyAction="http://tempuri.org/IFileTransfer/FileInstallResponse")]
-        MIEForm.FileService.EStatusOfOperation FileInstall(string filePath);
+        MIEForm.FileService.EStatusOfOperation FileInstall(string filePath, string[] pathOfExistsFiles);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileTransfer/FileInstall", ReplyAction="http://tempuri.org/IFileTransfer/FileInstallResponse")]
-        System.Threading.Tasks.Task<MIEForm.FileService.EStatusOfOperation> FileInstallAsync(string filePath);
+        System.Threading.Tasks.Task<MIEForm.FileService.EStatusOfOperation> FileInstallAsync(string filePath, string[] pathOfExistsFiles);
         
         // CODEGEN: Generating message contract since the operation UploadFileToServer is neither RPC nor document wrapped.
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileTransfer/UploadFileToServer", ReplyAction="http://tempuri.org/IFileTransfer/UploadFileToServerResponse")]
@@ -45,6 +45,12 @@ namespace MIEForm.FileService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileTransfer/UploadFileToServer", ReplyAction="http://tempuri.org/IFileTransfer/UploadFileToServerResponse")]
         System.Threading.Tasks.Task<MIEForm.FileService.UploadFileToServerResponse> UploadFileToServerAsync(MIEForm.FileService.FileData request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileTransfer/GetDirectoriesWithFile", ReplyAction="http://tempuri.org/IFileTransfer/GetDirectoriesWithFileResponse")]
+        string[] GetDirectoriesWithFile(string fileName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileTransfer/GetDirectoriesWithFile", ReplyAction="http://tempuri.org/IFileTransfer/GetDirectoriesWithFileResponse")]
+        System.Threading.Tasks.Task<string[]> GetDirectoriesWithFileAsync(string fileName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileTransfer/BackupAndChangeFiles", ReplyAction="http://tempuri.org/IFileTransfer/BackupAndChangeFilesResponse")]
         void BackupAndChangeFiles(string oldName, string[] allDirectoriesFromPath, string pathOfFileForInstalling);
@@ -111,12 +117,12 @@ namespace MIEForm.FileService {
                 base(binding, remoteAddress) {
         }
         
-        public MIEForm.FileService.EStatusOfOperation FileInstall(string filePath) {
-            return base.Channel.FileInstall(filePath);
+        public MIEForm.FileService.EStatusOfOperation FileInstall(string filePath, string[] pathOfExistsFiles) {
+            return base.Channel.FileInstall(filePath, pathOfExistsFiles);
         }
         
-        public System.Threading.Tasks.Task<MIEForm.FileService.EStatusOfOperation> FileInstallAsync(string filePath) {
-            return base.Channel.FileInstallAsync(filePath);
+        public System.Threading.Tasks.Task<MIEForm.FileService.EStatusOfOperation> FileInstallAsync(string filePath, string[] pathOfExistsFiles) {
+            return base.Channel.FileInstallAsync(filePath, pathOfExistsFiles);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -141,6 +147,14 @@ namespace MIEForm.FileService {
             inValue.fileName = fileName;
             inValue.stream = stream;
             return ((MIEForm.FileService.IFileTransfer)(this)).UploadFileToServerAsync(inValue);
+        }
+        
+        public string[] GetDirectoriesWithFile(string fileName) {
+            return base.Channel.GetDirectoriesWithFile(fileName);
+        }
+        
+        public System.Threading.Tasks.Task<string[]> GetDirectoriesWithFileAsync(string fileName) {
+            return base.Channel.GetDirectoriesWithFileAsync(fileName);
         }
         
         public void BackupAndChangeFiles(string oldName, string[] allDirectoriesFromPath, string pathOfFileForInstalling) {

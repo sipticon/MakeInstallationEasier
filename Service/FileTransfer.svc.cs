@@ -12,22 +12,16 @@ namespace Service
     {
         string pathForUploadFileToServer = Directory.GetCurrentDirectory();
         const string pathForInstalling = @"D:\Program files\NICE Systems";
-        public EStatusOfOperation FileInstall(string fileName)
+        public EStatusOfOperation FileInstall(string fileName, List<string> pathOfExistsFiles)
         {
             string pathOfFileForInstalling = Path.Combine(pathForUploadFileToServer, fileName);
-            string[] allDirectoriesFromPath =
-                Directory.GetDirectories(pathForInstalling, "*", searchOption: SearchOption.AllDirectories);
-            List<string> directoriesWhereFileExists = new List<string>();
+            
             List<Process> locks = new List<Process>();
             if (File.Exists(pathOfFileForInstalling))
             {
                 try
                 {
-                    foreach (string directory in allDirectoriesFromPath)
-                    {
-                        directoriesWhereFileExists.AddRange(Directory.GetFiles(directory, fileName));
-                    }
-
+                    List<string> directoriesWhereFileExists = pathOfExistsFiles;
                     foreach (string oldName in directoriesWhereFileExists)
                     {
                         FileInfo fileInfo = new FileInfo(oldName);
@@ -37,7 +31,7 @@ namespace Service
                             {
                                 StopWindowsService(fileInfo.GetLifetimeService().ToString());
 
-                                BackupAndChangeFiles(oldName, allDirectoriesFromPath, pathOfFileForInstalling);
+                                BackupAndChangeFiles(oldName, directoriesWhereFileExists.ToArray(), pathOfFileForInstalling);
 
                                 StartWindowsService(fileInfo.GetLifetimeService().ToString());
                             }
@@ -47,7 +41,7 @@ namespace Service
                             }
                         }
                         else
-                            BackupAndChangeFiles(oldName, allDirectoriesFromPath, pathOfFileForInstalling);
+                            BackupAndChangeFiles(oldName, directoriesWhereFileExists.ToArray(), pathOfFileForInstalling);
                     }
                 }
                 catch (Exception ex)
@@ -96,12 +90,11 @@ namespace Service
             {
                 foreach (string directory in allDirectoriesFromPath)
                 {
-                    if (File.Exists(directory + "\\" + fileName + "_backup") &&
-                        !File.Exists(directory + "\\" + fileName))
+                    if (File.Exists(directory + "_backup") &&
+                        !File.Exists(directory))
                     {
-                        File.Copy(pathOfFileForInstalling, directory + "\\" + fileName);
+                        File.Copy(pathOfFileForInstalling, directory);
                         Console.WriteLine($"File {fileName}  successfully moved to {directory}");
-                        
                     }
                 }
             }
@@ -147,6 +140,18 @@ namespace Service
             serviceController.Stop();
             serviceController.WaitForStatus(ServiceControllerStatus.Stopped, timeout);
             Console.WriteLine($"Service {serviceName} stopped  successfully");
+        }
+
+        public List<string> GetDirectoriesWithFile(string fileName)
+        {
+            string[] allDirectoriesFromPath =
+                Directory.GetDirectories(pathForInstalling, "*", searchOption: SearchOption.AllDirectories);
+            List<string> directoriesWhereFileExists = new List<string>();
+            foreach (string directory in allDirectoriesFromPath)
+            {
+                directoriesWhereFileExists.AddRange(Directory.GetFiles(directory, fileName));
+            }
+            return directoriesWhereFileExists;
         }
     }
 }
