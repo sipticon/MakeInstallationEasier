@@ -1,12 +1,12 @@
 ﻿using System;
 using System.ServiceModel;
 using System.ServiceModel.Description;
-using System.Web.Services.Description;
 
 namespace Service
 {
     public class Program
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public static void Main()
         {
             Uri baseAddress = new Uri("http://10.128.35.12:9090/");
@@ -30,25 +30,18 @@ namespace Service
 
                     serviceHost.Open();
 
+                    log.Info("Service started successfully.");
+
                     Console.WriteLine("The service is ready.");
                     Console.WriteLine("Press <ENTER> to terminate service.");
                     Console.ReadLine();
 
                     serviceHost.Close();
-                }
-                catch (TimeoutException timeProblem)
-                {
-                    Console.WriteLine(timeProblem.Message);
-                    Console.ReadLine();
-                }
-                catch (CommunicationException commProblem)
-                {
-                    Console.WriteLine(commProblem.Message);
-                    Console.ReadLine();
+                    log.Info("Service stopped successfully.");
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex.Message);
+                    log.Error("Exception while opening service.",ex);
                     Console.ReadLine();
                 }
             }
