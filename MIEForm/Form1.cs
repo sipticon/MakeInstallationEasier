@@ -1,12 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using MIEForm.FileService;
 
@@ -93,7 +87,7 @@ namespace MIEForm
         private void helpToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show(
-                "For replacing file just drag and drop it to the program window or select File->Open and choose needed one. Then press Replace button and wait for the result.",
+                "there will be instruction how to use this programm...",
                 "Help",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information,
@@ -125,8 +119,17 @@ namespace MIEForm
             fileData.stream = openedFileStream;
             fileData.fileName = Path.GetFileName(openedFileStream.Name);
             checkedListBox1.Items.AddRange(fileService.GetDirectoriesWithFile(fileData.fileName));
+        }
 
-           
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(
+                "there will be information about this programm...",
+                "About",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information,
+                MessageBoxDefaultButton.Button1,
+                MessageBoxOptions.DefaultDesktopOnly);
         }
     }
 }
