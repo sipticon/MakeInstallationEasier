@@ -31,6 +31,7 @@ namespace MIEForm
         }
         private void button1_Click(object sender, EventArgs e)
         {
+            toolStripStatusLabel2.Text = "";
             Client.Client client = new Client.Client();
             FileTransferClient fileService = new FileTransferClient();
             string filePath = label2.Text;
@@ -199,6 +200,48 @@ namespace MIEForm
                 MessageBoxDefaultButton.Button1,
                 MessageBoxOptions.DefaultDesktopOnly);
             log.Info("About window successfully opened.");
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (checkedListBox1.Items.Count > 0)
+            {
+                for (int i = 0; i < checkedListBox1.Items.Count; i++)
+                {
+                    checkedListBox1.SetItemChecked(i, true);
+                }
+            }
+            else
+            {
+                MessageBox.Show(
+                    "Sorry, but list is empty.",
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error,
+                    MessageBoxDefaultButton.Button1,
+                    MessageBoxOptions.DefaultDesktopOnly);
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (checkedListBox1.CheckedItems.Count > 0)
+            {
+                for (int i = 0; i < checkedListBox1.Items.Count; i++)
+                {
+                    checkedListBox1.SetItemChecked(i, false);
+                }
+            }
+            else
+            {
+                MessageBox.Show(
+                    "Sorry, but checked items count is 0.",
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error,
+                    MessageBoxDefaultButton.Button1,
+                    MessageBoxOptions.DefaultDesktopOnly);
+            }
         }
     }
 }

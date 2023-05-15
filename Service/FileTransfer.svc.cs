@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.ServiceProcess;
+using System.Threading;
 using System.Xml.Linq;
 
 namespace Service
@@ -77,14 +78,13 @@ namespace Service
             {
                 foreach (var proc in locks)
                 {
+                    
                     proc.Kill();
                     log.Info($"Process {proc} stopped successfully.");
                     proc.WaitForExit(1000);
-                    File.Delete(newName);
-                    log.Info($"File {newName} deleted successfully.");
-                    proc.Start();
-                    log.Info($"Process {proc} started successfully.");
                 }
+                File.Delete(newName);
+                log.Info($"File {newName} deleted successfully.");
             }
             else if (File.Exists(newName))
             {
