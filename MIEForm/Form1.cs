@@ -133,7 +133,7 @@ namespace MIEForm
         private void helpToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show(
-                "there will be instruction how to use this programm...",
+                "To replace file you need to drag and drop it to window or select File->Open, than click Find directories and select needed. Choose Replace and wait for the result of operation. Good luck!",
                 "Help",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information,
@@ -193,7 +193,7 @@ namespace MIEForm
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show(
-                "there will be information about this programm...",
+                "MakeInsrallationEasier it is a program for backup and replace files on server side. It also can stop and start services/processes.",
                 "About",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information,
