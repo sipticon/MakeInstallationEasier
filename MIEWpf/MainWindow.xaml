@@ -3,9 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MIEWpf"
+        xmlns:wpfTool="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
         mc:Ignorable="d"
-        Title="MakeInstallationEasier" Height="450" Width="800" FontFamily="Tempus Sans ITC" FontSize="14" WindowStyle="ThreeDBorderWindow">
+        Title="MakeInstallationEasier" Height="450" Width="800" FontFamily="Tempus Sans ITC" FontSize="14" WindowStyle="ThreeDBorderWindow" AllowDrop="True" DragEnter="Window_DragOver" Drop="Window_Drop">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -16,33 +16,33 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
-            <RowDefinition/>
+            <RowDefinition Height="50"/>
             <RowDefinition/>
             <RowDefinition Height="75"/>
             <RowDefinition Height="75"/>
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
-        <Menu Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" Background="Thistle">
+        <Menu Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" Background="Thistle" FontFamily="Tempus Sans ITC" FontSize="14">
             <MenuItem Header="File" Height="30">
-                <MenuItem Header="Open" Height="30"/>
+                <MenuItem Header="Open" Height="30" Click="Open_OnClick"/>
             </MenuItem>
-            <MenuItem Header="Help" Height="30"/>
-            <MenuItem Header="About" Height="30"/>
+            <MenuItem Header="Help" Height="30" Click="Help_OnClick"/>
+            <MenuItem Header="About" Height="30" Click="About_OnClick"/>
         </Menu>
         <StatusBar Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="5" Background="Thistle">
             <StatusBarItem>
                 <TextBlock Height="30" Text="The status of operation is"/>
             </StatusBarItem>
-            <StatusBarItem>
+            <StatusBarItem FontFamily="Tempus Sans ITC" FontSize="14">
                 <TextBlock Height="30" x:Name="statusOfOperation"/>
             </StatusBarItem>
         </StatusBar>
-        <ListBox x:Name="chekedListbox" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Grid.RowSpan="4" Background="Thistle"/>
-        <TextBlock Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="1" Text="Please, drag and drop your file there:"/>
-        <TextBlock Grid.Column="3" Grid.Row="2" Grid.ColumnSpan="2" Grid.RowSpan="1" x:Name="textFilePath"/>
+        <wpfTool:CheckListBox  Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Grid.RowSpan="4" Background="Thistle" x:Name="checkedListBox"/>
+        <TextBlock Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="1" Text="Please, drag and drop your file there:" FontSize="20" FontWeight="Bold"/>
+        <TextBlock Grid.Column="3" Grid.Row="2" Grid.ColumnSpan="2" Grid.RowSpan="1" x:Name="textFilePath" TextWrapping="Wrap"/>
         <Button Grid.Column="3" Grid.Row="3" x:Name="findDirectoriesButton" Content="Find directories" Click="FindDirectoriesButton_OnClick"/>
-        <Button Grid.Column="4" Grid.Row="3" x:Name="replaceButton" Content="Replace"/>
-        <Button Grid.Column="3" Grid.Row="4" x:Name="selectAllButton" Content="Select all"/>
-        <Button Grid.Column="4" Grid.Row="4" x:Name="clearSelectionButton" Content="Clear selection"/>
+        <Button Grid.Column="4" Grid.Row="3" x:Name="replaceButton" Content="Replace" Click="ReplaceButton_OnClick"/>
+        <Button Grid.Column="3" Grid.Row="4" x:Name="selectAllButton" Content="Select all" Click="SelectAllButton_OnClick"/>
+        <Button Grid.Column="4" Grid.Row="4" x:Name="clearSelectionButton" Content="Clear selection" Click="ClearSelectionButton_OnClick"/>
     </Grid>
 </Window>
