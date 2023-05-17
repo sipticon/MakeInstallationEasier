@@ -24,5 +24,12 @@ namespace MIEWpf
         {
             InitializeComponent();
         }
+
+        private void FindDirectoriesButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
     }
+
+
 }
