@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Forms;
 using MIEWpf.FileService;
+using Xceed.Wpf.Toolkit;
 using DataFormats = System.Windows.DataFormats;
 using DragDropEffects = System.Windows.DragDropEffects;
 using DragEventArgs = System.Windows.DragEventArgs;
@@ -37,7 +41,14 @@ namespace MIEWpf
                 e.Effects = DragDropEffects.Copy;
         }
 
-        private void ReplaceButton_OnClick(object sender, RoutedEventArgs e)
+        private async void ReplaceButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            spinnerReplace.Visibility = Visibility.Visible;
+            await ReplaceFiles();
+            spinnerReplace.Visibility = Visibility.Hidden;
+        }
+
+        private async Task ReplaceFiles()
         {
             statusOfOperation.Text = "";
             Client.Client client = new Client.Client();
@@ -102,7 +113,7 @@ namespace MIEWpf
             string resultOfOperation = "NONE";
             try
             {
-                resultOfOperation = fileService.FileInstall(fileData.fileName, selectedItems.ToArray()).ToString();
+                resultOfOperation = (await fileService.FileInstallAsync(fileData.fileName, selectedItems.ToArray())).ToString();
                 log.Info($"Operation finished with status {resultOfOperation}.");
             }
             catch (Exception ex)
@@ -113,7 +124,15 @@ namespace MIEWpf
             openedFileStream.Close();
         }
 
-        private void FindDirectoriesButton_OnClick(object sender, RoutedEventArgs e)
+        private async void FindDirectoriesButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            checkedListBox.ItemsSource = null;
+            spinnerPath.Visibility = Visibility.Visible;
+            await GetAllDirectoriesWhereFileExists();
+            spinnerPath.Visibility = Visibility.Hidden;
+        }
+
+        private async Task GetAllDirectoriesWhereFileExists()
         {
             try
             {
@@ -136,7 +155,9 @@ namespace MIEWpf
                 FileData fileData = new FileData();
                 fileData.stream = openedFileStream;
                 fileData.fileName = Path.GetFileName(openedFileStream.Name);
-                checkedListBox.ItemsSource = fileService.GetDirectoriesWithFile(fileData.fileName);
+
+                checkedListBox.ItemsSource = await fileService.GetDirectoriesWithFileAsync(fileData.fileName);
+
                 if (checkedListBox.Items.Count == 0)
                 {
                     MessageBox.Show(

@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:wpfTool="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"
         Title="MakeInstallationEasier" Height="500" Width="800" FontFamily="Times New Roman" FontSize="14" WindowStyle="ThreeDBorderWindow" AllowDrop="True" DragEnter="Window_DragOver" Drop="Window_Drop" Background="#FF353535" Foreground="White">
     <Grid>
@@ -45,5 +46,7 @@
         <Button Grid.Column="4" Grid.Row="3" x:Name="replaceButton" Content="Replace" Click="ReplaceButton_OnClick" Background="#2B9148" Foreground="White"/>
         <Button Grid.Column="3" Grid.Row="4" x:Name="selectAllButton" Content="Select all" Click="SelectAllButton_OnClick" Background="#2B9148" Foreground="White"/>
         <Button Grid.Column="4" Grid.Row="4" x:Name="clearSelectionButton" Content="Clear selection" Click="ClearSelectionButton_OnClick" Background="#2B9148" Foreground="White"/>
+        <fa:ImageAwesome x:Name="spinnerPath" Grid.Column="1" Grid.Row="2" Icon="Spinner"  Spin="True" Height="50" Width="50" Visibility="Hidden" Foreground="#2B9148" HorizontalAlignment="Center" Margin="0,120,0,20" />
+        <fa:ImageAwesome x:Name="spinnerReplace" Grid.Column="3" Grid.Row="2" Grid.ColumnSpan="2" Icon="Spinner"  Spin="True" Height="50" Width="50" Visibility="Hidden" Foreground="#2B9148" HorizontalAlignment="Center" VerticalAlignment="Center" />
     </Grid>
 </Window>
