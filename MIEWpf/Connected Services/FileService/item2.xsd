@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Service" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Service" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="EStatusOfOperation">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="SUCCESSFULL" />
+      <xs:enumeration value="FILEDOESNOTEXISTS" />
+      <xs:enumeration value="FAILWHILEBACKUP" />
+      <xs:enumeration value="FAILWILESTOPSERV" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="EStatusOfOperation" nillable="true" type="tns:EStatusOfOperation" />
+</xs:schema>

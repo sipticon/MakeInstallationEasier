@@ -9,7 +9,7 @@ namespace Service
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public static void Main()
         {
-            Uri baseAddress = new Uri("http://10.128.35.12:9090/");
+            Uri baseAddress = new Uri("http://localhost:9090/");
             using (ServiceHost serviceHost = new ServiceHost(typeof(FileTransfer), baseAddress))
             {
                 try

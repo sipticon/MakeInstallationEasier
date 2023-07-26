@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -18,6 +20,8 @@ namespace MIEWpf
     public partial class MainWindow : Window
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private List<string> fileForUploadPaths = new List<string>();
+        private List<string> directoriesWithFiles = new List<string>();
 
         public MainWindow()
         {
@@ -30,7 +34,8 @@ namespace MIEWpf
             string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
             foreach (string file in files)
             {
-                textFilePath.Text = file;
+                textFilePath.Text += $"{file} \n";
+                fileForUploadPaths.Add(file);
                 log.Info($"File {file} successfully chosen.");
             }
         }
@@ -49,11 +54,39 @@ namespace MIEWpf
         }
 
         private async Task ReplaceFiles()
+
         {
             statusOfOperation.Text = "";
+            List<Thread> threads = new List<Thread>();
+
+            foreach (var filePath in fileForUploadPaths)
+            {
+                threads.Add(new Thread(() => UploadAndReplaceFileOnServer(filePath)));
+            }
+
+            if (threads.Count > 0)
+            {
+                foreach (var thread in threads)
+                {
+                    try
+                    {
+                        thread.Start();
+                    }
+                    catch(Exception ex)
+                    {
+                        log.Error($"Exception while thread {thread.ThreadState} start.", ex);
+                        statusOfOperation.Text = "Error";
+                    }
+                }
+            }
+            statusOfOperation.Text = "SUCCESSFUL";
+        }
+
+        private void UploadAndReplaceFileOnServer(string filePath)
+        {
             Client.Client client = new Client.Client();
             FileTransferClient fileService = new FileTransferClient();
-            string filePath = textFilePath.Text;
+            
             if (filePath == "" || filePath == null)
             {
                 MessageBox.Show(
@@ -66,7 +99,6 @@ namespace MIEWpf
             }
 
             FileStream openedFileStream = client.OpenFileFromDir(filePath) as FileStream;
-
             FileData fileData = new FileData();
             try
             {
@@ -113,14 +145,13 @@ namespace MIEWpf
             string resultOfOperation = "NONE";
             try
             {
-                resultOfOperation = (await fileService.FileInstallAsync(fileData.fileName, selectedItems.ToArray())).ToString();
+                resultOfOperation = (fileService.FileInstallAsync(fileData.fileName, selectedItems.ToArray())).ToString();
                 log.Info($"Operation finished with status {resultOfOperation}.");
             }
             catch (Exception ex)
             {
                 log.Error("Exception while change file on server (see server logs).", ex);
             }
-            statusOfOperation.Text = resultOfOperation;
             openedFileStream.Close();
         }
 
@@ -139,24 +170,27 @@ namespace MIEWpf
                 checkedListBox.UnSelectAll();
                 Client.Client client = new Client.Client();
                 FileTransferClient fileService = new FileTransferClient();
-                string filePath = textFilePath.Text;
-                if (filePath == "" || filePath == null)
+                foreach (string filePath in fileForUploadPaths)
                 {
-                    MessageBox.Show(
-                        "Please choose file you need to replace!",
-                        "Important!",
-                        MessageBoxButton.OK,
-                        MessageBoxImage.Exclamation);
-                    return;
+                    if (filePath == "" || filePath == null)
+                    {
+                        MessageBox.Show(
+                            "Please choose file you need to replace!",
+                            "Important!",
+                            MessageBoxButton.OK,
+                            MessageBoxImage.Exclamation);
+                        return;
+                    }
+
+                    FileStream openedFileStream = client.OpenFileFromDir(filePath) as FileStream;
+
+                    FileData fileData = new FileData();
+                    fileData.stream = openedFileStream;
+                    fileData.fileName = Path.GetFileName(openedFileStream.Name);
+                    
+                    directoriesWithFiles.AddRange(await fileService.GetDirectoriesWithFileAsync(fileData.fileName));
                 }
-
-                FileStream openedFileStream = client.OpenFileFromDir(filePath) as FileStream;
-
-                FileData fileData = new FileData();
-                fileData.stream = openedFileStream;
-                fileData.fileName = Path.GetFileName(openedFileStream.Name);
-
-                checkedListBox.ItemsSource = await fileService.GetDirectoriesWithFileAsync(fileData.fileName);
+                checkedListBox.ItemsSource = directoriesWithFiles;
 
                 if (checkedListBox.Items.Count == 0)
                 {

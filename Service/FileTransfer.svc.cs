@@ -10,8 +10,8 @@ namespace Service
 {
     public class FileTransfer : IFileTransfer
     {
-        string pathForUploadFileToServer = Directory.GetCurrentDirectory();
-        const string pathForInstalling = @"D:\Program files\NICE Systems";
+        string pathForUploadFileToServer = @"C:\Users\oleksandrm";
+        const string pathForInstalling = @"C:\Users\oleksandrm\source";
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public EStatusOfOperation FileInstall(string fileName, List<string> pathOfExistsFiles)
         {
@@ -185,7 +185,8 @@ namespace Service
             List<string> directoriesWhereFileExists = new List<string>();
             foreach (string directory in allDirectoriesFromPath)
             {
-                directoriesWhereFileExists.AddRange(Directory.GetFiles(directory, fileName));
+                if(!directory.Contains("NPS Agent"))
+                    directoriesWhereFileExists.AddRange(Directory.GetFiles(directory, fileName));
             }
             log.Info($"All directories where {fileName} exists sent to client successfully.");
             return directoriesWhereFileExists;
