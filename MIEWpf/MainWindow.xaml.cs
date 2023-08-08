@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Forms;
 using MIEWpf.FileService;
-using Xceed.Wpf.Toolkit;
 using DataFormats = System.Windows.DataFormats;
 using DragDropEffects = System.Windows.DragDropEffects;
 using DragEventArgs = System.Windows.DragEventArgs;
@@ -54,7 +50,6 @@ namespace MIEWpf
         }
 
         private async Task ReplaceFiles()
-
         {
             statusOfOperation.Text = "";
             List<Thread> threads = new List<Thread>();
@@ -71,6 +66,7 @@ namespace MIEWpf
                     try
                     {
                         thread.Start();
+                        thread.Join();
                     }
                     catch(Exception ex)
                     {
@@ -82,23 +78,8 @@ namespace MIEWpf
             statusOfOperation.Text = "SUCCESSFUL";
         }
 
-        private void UploadAndReplaceFileOnServer(string filePath)
+        private FileData CreateDataOfFile(FileStream openedFileStream)
         {
-            Client.Client client = new Client.Client();
-            FileTransferClient fileService = new FileTransferClient();
-            
-            if (filePath == "" || filePath == null)
-            {
-                MessageBox.Show(
-                    "Please choose file you need to replace!",
-                    "Important!",
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Exclamation);
-                log.Error("Error because file for changing was not chosen.");
-                return;
-            }
-
-            FileStream openedFileStream = client.OpenFileFromDir(filePath) as FileStream;
             FileData fileData = new FileData();
             try
             {
@@ -112,6 +93,21 @@ namespace MIEWpf
                 throw ex;
             }
 
+            return fileData;
+        }
+
+        private void ShowExclamationMessageBox(string textForMessageBox, string textForLog)
+        {
+            MessageBox.Show(
+                textForMessageBox,
+                "Important!",
+                MessageBoxButton.OK,
+                MessageBoxImage.Exclamation);
+            log.Error(textForLog);
+        }
+
+        private List<string> GetSelectedDirectoryForInstallation()
+        {
             List<string> selectedItems = new List<string>();
             if (checkedListBox.SelectedItems.Count > 0)
             {
@@ -121,17 +117,11 @@ namespace MIEWpf
                     log.Info($"{ob.ToString()} was chosen as a directory for installation.");
                 }
             }
-            else
-            {
-                MessageBox.Show(
-                    "Please choose directory!",
-                    "Important!",
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Exclamation);
-                log.Error("Directories for file installation was not chosen.");
-                return;
-            }
+            return selectedItems;
+        }
 
+        private void UploadFileToServer(FileTransferClient fileService, FileData fileData)
+        {
             try
             {
                 fileService.UploadFileToServer(fileData.fileName, fileData.stream);
@@ -141,17 +131,41 @@ namespace MIEWpf
             {
                 log.Error($"Exception while uploading {fileData.fileName} to server.", ex);
             }
+        }
 
-            string resultOfOperation = "NONE";
+        private void UploadAndReplaceFileOnServer(string filePath)
+        {
+            Client.Client client = new Client.Client();
+            FileTransferClient fileService = new FileTransferClient();
+
+            if (string.IsNullOrEmpty(filePath))
+            {
+                ShowExclamationMessageBox("Please choose file you need to replace!", "Error because file for changing was not chosen.");
+                return;
+            }
+
+            FileStream openedFileStream = client.OpenFileFromDir(filePath) as FileStream;
+            FileData fileData = CreateDataOfFile(openedFileStream);
+
+            UploadFileToServer(fileService, fileData);
+
+            List<string> selectedItems = GetSelectedDirectoryForInstallation();
+            if (selectedItems.Count == 0)
+            {
+                ShowExclamationMessageBox("Please choose directory!", "Directories for file installation was not chosen.");
+                return;
+            }
+               
             try
             {
-                resultOfOperation = (fileService.FileInstallAsync(fileData.fileName, selectedItems.ToArray())).ToString();
+                string resultOfOperation = (fileService.FileInstallAsync(fileData.fileName, selectedItems.ToArray())).ToString();
                 log.Info($"Operation finished with status {resultOfOperation}.");
             }
             catch (Exception ex)
             {
                 log.Error("Exception while change file on server (see server logs).", ex);
             }
+
             openedFileStream.Close();
         }
 
