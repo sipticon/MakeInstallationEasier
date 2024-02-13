@@ -284,7 +284,7 @@ namespace MIEWpf
         private void About_OnClick(object sender, RoutedEventArgs e)
         {
             MessageBox.Show(
-                "MakeInsrallationEasier it is a program for backup and replace files on server side. It also can stop and start services/processes.",
+                "MakeInstallationEasier it is a program for backup and replace files on server side. It also can stop and start services/processes.",
                 "About",
                 MessageBoxButton.OK,
                 MessageBoxImage.Information);

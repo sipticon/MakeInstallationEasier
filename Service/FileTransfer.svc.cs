@@ -3,15 +3,13 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.ServiceProcess;
-using System.Threading;
-using System.Xml.Linq;
 
 namespace Service
 {
     public class FileTransfer : IFileTransfer
     {
-        string pathForUploadFileToServer = @"C:\Users\oleksandrm";
-        const string pathForInstalling = @"C:\Users\oleksandrm\source";
+        string pathForUploadFileToServer = @"C:\Users\CURRENTUSER";
+        const string pathForInstalling = @"C:\Users\CURRENTUSER\source";
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public EStatusOfOperation FileInstall(string fileName, List<string> pathOfExistsFiles)
         {
@@ -78,7 +76,6 @@ namespace Service
             {
                 foreach (var proc in locks)
                 {
-                    
                     proc.Kill();
                     log.Info($"Process {proc} stopped successfully.");
                     proc.WaitForExit(1000);
@@ -157,7 +154,6 @@ namespace Service
                 log.Error($"Exception while starting service {serviceName}.", ex);
                 throw ex;
             }
-            
         }
 
         private void StopWindowsService(string serviceName)
@@ -175,7 +171,6 @@ namespace Service
                 log.Error($"Exception while stopping service {serviceName}.", ex);
                 throw ex;
             }
-
         }
 
         public List<string> GetDirectoriesWithFile(string fileName)
