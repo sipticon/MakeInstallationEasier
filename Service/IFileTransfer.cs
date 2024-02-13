@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization;
 using System.ServiceModel;
@@ -9,10 +10,13 @@ namespace Service
     public interface IFileTransfer
     {
         [OperationContract]
-        EStatusOfOperation FileInstall(string filePath);
+        EStatusOfOperation FileInstall(string filePath, List<string> pathOfExistsFiles);
 
         [OperationContract]
         void UploadFileToServer(FileData fileData);
+
+        [OperationContract]
+        List<string> GetDirectoriesWithFile(string fileName);
 
         [OperationContract]
         void BackupAndChangeFiles(string oldName, string[] allDirectoriesFromPath, string pathOfFileForInstalling);

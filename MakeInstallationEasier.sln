@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "Service\Service.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MIEForm", "MIEForm\MIEForm.csproj", "{CF3F4C2D-5D7C-451E-8B03-296C87C74EEA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MIEWpf", "MIEWpf\MIEWpf.csproj", "{EBF3A0EA-6540-4EA9-8698-931D73B9D8F8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{CF3F4C2D-5D7C-451E-8B03-296C87C74EEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF3F4C2D-5D7C-451E-8B03-296C87C74EEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF3F4C2D-5D7C-451E-8B03-296C87C74EEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBF3A0EA-6540-4EA9-8698-931D73B9D8F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBF3A0EA-6540-4EA9-8698-931D73B9D8F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBF3A0EA-6540-4EA9-8698-931D73B9D8F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBF3A0EA-6540-4EA9-8698-931D73B9D8F8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

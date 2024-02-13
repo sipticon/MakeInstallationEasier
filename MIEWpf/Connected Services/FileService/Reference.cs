@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MIEForm.FileService {
+namespace MIEWpf.FileService {
     using System.Runtime.Serialization;
     
     
@@ -34,17 +34,17 @@ namespace MIEForm.FileService {
     public interface IFileTransfer {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileTransfer/FileInstall", ReplyAction="http://tempuri.org/IFileTransfer/FileInstallResponse")]
-        MIEForm.FileService.EStatusOfOperation FileInstall(string filePath, string[] pathOfExistsFiles);
+        MIEWpf.FileService.EStatusOfOperation FileInstall(string filePath, string[] pathOfExistsFiles);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileTransfer/FileInstall", ReplyAction="http://tempuri.org/IFileTransfer/FileInstallResponse")]
-        System.Threading.Tasks.Task<MIEForm.FileService.EStatusOfOperation> FileInstallAsync(string filePath, string[] pathOfExistsFiles);
+        System.Threading.Tasks.Task<MIEWpf.FileService.EStatusOfOperation> FileInstallAsync(string filePath, string[] pathOfExistsFiles);
         
         // CODEGEN: Generating message contract since the operation UploadFileToServer is neither RPC nor document wrapped.
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileTransfer/UploadFileToServer", ReplyAction="http://tempuri.org/IFileTransfer/UploadFileToServerResponse")]
-        MIEForm.FileService.UploadFileToServerResponse UploadFileToServer(MIEForm.FileService.FileData request);
+        MIEWpf.FileService.UploadFileToServerResponse UploadFileToServer(MIEWpf.FileService.FileData request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileTransfer/UploadFileToServer", ReplyAction="http://tempuri.org/IFileTransfer/UploadFileToServerResponse")]
-        System.Threading.Tasks.Task<MIEForm.FileService.UploadFileToServerResponse> UploadFileToServerAsync(MIEForm.FileService.FileData request);
+        System.Threading.Tasks.Task<MIEWpf.FileService.UploadFileToServerResponse> UploadFileToServerAsync(MIEWpf.FileService.FileData request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileTransfer/GetDirectoriesWithFile", ReplyAction="http://tempuri.org/IFileTransfer/GetDirectoriesWithFileResponse")]
         string[] GetDirectoriesWithFile(string fileName);
@@ -91,12 +91,12 @@ namespace MIEForm.FileService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IFileTransferChannel : MIEForm.FileService.IFileTransfer, System.ServiceModel.IClientChannel {
+    public interface IFileTransferChannel : MIEWpf.FileService.IFileTransfer, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class FileTransferClient : System.ServiceModel.ClientBase<MIEForm.FileService.IFileTransfer>, MIEForm.FileService.IFileTransfer {
+    public partial class FileTransferClient : System.ServiceModel.ClientBase<MIEWpf.FileService.IFileTransfer>, MIEWpf.FileService.IFileTransfer {
         
         public FileTransferClient() {
         }
@@ -117,36 +117,36 @@ namespace MIEForm.FileService {
                 base(binding, remoteAddress) {
         }
         
-        public MIEForm.FileService.EStatusOfOperation FileInstall(string filePath, string[] pathOfExistsFiles) {
+        public MIEWpf.FileService.EStatusOfOperation FileInstall(string filePath, string[] pathOfExistsFiles) {
             return base.Channel.FileInstall(filePath, pathOfExistsFiles);
         }
         
-        public System.Threading.Tasks.Task<MIEForm.FileService.EStatusOfOperation> FileInstallAsync(string filePath, string[] pathOfExistsFiles) {
+        public System.Threading.Tasks.Task<MIEWpf.FileService.EStatusOfOperation> FileInstallAsync(string filePath, string[] pathOfExistsFiles) {
             return base.Channel.FileInstallAsync(filePath, pathOfExistsFiles);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        MIEForm.FileService.UploadFileToServerResponse MIEForm.FileService.IFileTransfer.UploadFileToServer(MIEForm.FileService.FileData request) {
+        MIEWpf.FileService.UploadFileToServerResponse MIEWpf.FileService.IFileTransfer.UploadFileToServer(MIEWpf.FileService.FileData request) {
             return base.Channel.UploadFileToServer(request);
         }
         
         public void UploadFileToServer(string fileName, System.IO.Stream stream) {
-            MIEForm.FileService.FileData inValue = new MIEForm.FileService.FileData();
+            MIEWpf.FileService.FileData inValue = new MIEWpf.FileService.FileData();
             inValue.fileName = fileName;
             inValue.stream = stream;
-            MIEForm.FileService.UploadFileToServerResponse retVal = ((MIEForm.FileService.IFileTransfer)(this)).UploadFileToServer(inValue);
+            MIEWpf.FileService.UploadFileToServerResponse retVal = ((MIEWpf.FileService.IFileTransfer)(this)).UploadFileToServer(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<MIEForm.FileService.UploadFileToServerResponse> MIEForm.FileService.IFileTransfer.UploadFileToServerAsync(MIEForm.FileService.FileData request) {
+        System.Threading.Tasks.Task<MIEWpf.FileService.UploadFileToServerResponse> MIEWpf.FileService.IFileTransfer.UploadFileToServerAsync(MIEWpf.FileService.FileData request) {
             return base.Channel.UploadFileToServerAsync(request);
         }
         
-        public System.Threading.Tasks.Task<MIEForm.FileService.UploadFileToServerResponse> UploadFileToServerAsync(string fileName, System.IO.Stream stream) {
-            MIEForm.FileService.FileData inValue = new MIEForm.FileService.FileData();
+        public System.Threading.Tasks.Task<MIEWpf.FileService.UploadFileToServerResponse> UploadFileToServerAsync(string fileName, System.IO.Stream stream) {
+            MIEWpf.FileService.FileData inValue = new MIEWpf.FileService.FileData();
             inValue.fileName = fileName;
             inValue.stream = stream;
-            return ((MIEForm.FileService.IFileTransfer)(this)).UploadFileToServerAsync(inValue);
+            return ((MIEWpf.FileService.IFileTransfer)(this)).UploadFileToServerAsync(inValue);
         }
         
         public string[] GetDirectoriesWithFile(string fileName) {
